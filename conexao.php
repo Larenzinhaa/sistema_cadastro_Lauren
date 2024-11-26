@@ -1,1 +1,24 @@
-<!-- 1ª Digitação (Aqui) -->
+<?php
+$servername = "localhost";
+$usermane = "root";
+$password = "";
+$dbname = "sistema";
+
+$conn = new mysqli($servername, $usermane, $password, $dbname);
+
+if ($conn->connect_error){
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Adiciona a coluna 'imagem' à tabela 'produtos' se ela não existir
+$sql = "SHOW COLUMNS FROM produtos LIKE 'Imagem'";
+$result = $conn->query($sql);
+
+// Adiciona a coluna 'Imagem' à tabela 'fornecedores' se ela não existir
+$sql = "SHOW COLUMNS FROM produtos LIKE 'Imagem'";
+$result = $conn->query($sql);
+if ($result->num_rows == 0){
+    $sql = "ALTER TABLE fornecedores ADD COLUMN imagem VARCHAR(255)";
+    $conn->query($sql);
+}
+?>
